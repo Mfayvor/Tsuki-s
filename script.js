@@ -1,142 +1,135 @@
-// --- Page Data ---
-const pages = {
-  home: `
-    <h2>Welcome to a world made just for you, my Angel 💕</h2>
-    <p>Every heartbeat, every word, every page — all for you.</p>
-  `,
-  letters: `
-    <h2>Love Letters 💌</h2>
-    <p id="loveText">Click below to get a new love letter 💖</p>
-    <button onclick="generateLoveLetter()">Generate Love Letter</button>
-  `,
-  motivation: `
-    <h2>Motivational Quotes 🌹</h2>
-    <p id="quoteText">Click to get inspired, my queen 👑</p>
-    <button onclick="generateQuote()">New Quote</button>
-  `,
-  gallery: `
-    <h2>My Goddess 📸</h2>
-    <div class="slideshow">
-      <img id="galleryImage" src="images/tsuki8.jpg" alt="Her smile">
-      <p id="caption">Her beautiful smile that lights up my world 💫</p>
-      <button onclick="nextImage()">Next</button>
-    </div>
-  `,
-  about: `
-    <h2>A Portrait of My Beloved Tsuki 💖</h2>
-    <p>My Chisom, my Tsuki, is a universe of warmth and captivating contrast. To look at her is to be instantly charmed: she possesses a rare, luminous beauty—a perfect, harmonious blend of being utterly cute, undeniably sexy, and classically beautiful, all wrapped into one incredible person. Her dark skin is rich and flawless, like polished mahogany, and it glows with an inner light that always catches my eye.
-Beneath that stunning exterior is the fascinating woman I'm lucky enough to know and love. She has a wonderful spirit, one that is immensely kind and deeply caring, always thinking of others. Yet, she is a woman of quiet strength, often choosing to keep her deeper emotions to herself; she tends to hide her actual feelings, a sensitivity that makes the moments she does open up to me all the more precious. She isn't the boldest person, which makes her small acts of courage—like trying something new or voicing a strong opinion—all the more admirable.
-What truly makes her captivating is the lovely edge to her personality. Yes, she can be a little stubborn at times and, bless her heart, she nags a lot. But these quirks are part of the wonderful rhythm of our life together—they're what keep things honest, lively, and wonderfully her. I honestly like that about her; it shows me she cares enough to challenge me and keep me on my toes.
-Perhaps the most inspiring thing about her is her deep, infectious intellectual curiosity. She is so eager to learn more about everything, constantly seeking knowledge, growth, and new ways to see the world. That thirst for understanding is something I admire every day.
-She is my home, my comfort, my delightful challenge, and the most beautiful woman I know—my amazing Chisom.</p>
-  `
-};
+// PAGE NAVIGATION
+const navLinks = document.querySelectorAll("nav a");
+const pages = document.querySelectorAll(".page");
 
-// --- Page Switching ---
-const content = document.getElementById("content");
-const navButtons = document.querySelectorAll(".nav-btn");
-
-function loadPage(page) {
-  content.style.opacity = 0;
-  setTimeout(() => {
-    content.innerHTML = pages[page];
-    content.style.opacity = 1;
-  }, 300);
-}
-
-navButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const page = btn.dataset.page;
-    loadPage(page);
+navLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    const target = link.dataset.page;
+    pages.forEach(p => p.classList.remove("active"));
+    document.getElementById(target).classList.add("active");
   });
 });
 
-// --- Default Page ---
-loadPage("home");
-
-// --- Love Letters ---
+// RANDOM LOVE LETTERS
 const loveLetters = [
-  "My love, every second with you feels like a melody I never want to end.",
-  "You’re my reason for every smile, every heartbeat, every dream.",
-  "If I had to choose between breathing and loving you, I’d use my last breath to say ‘I love you.’",
-  "You’re my today and all of my tomorrows.",
-  "Another circle round the sun. Another year round the clock. A new chapter has begun. Born of grace, carved from my side.In your light, I find my guide.",
-  "Your heart so kind, your soul so rare,  A gift from God, beyond compare. So I thank Him for this day, The day He formed you from my clay",
-  "Grow in wisdom, bloom in grace, Let His glory light your face. And as you walk through each new year, Know you are loved, held close, kept near."
+  "You’re my sunshine on rainy days ☀️💗",
+  "Every beat of my heart whispers your name 💞",
+  "You make ordinary moments magical ✨",
+  "If I could hold time, I’d freeze every second with you ❤️",
+  "You are my favorite hello and hardest goodbye 💋"
 ];
+
+const loveLetter = document.getElementById("loveLetter");
+const newLetter = document.getElementById("newLetter");
 
 function generateLoveLetter() {
-  const text = document.getElementById("loveText");
-  const random = loveLetters[Math.floor(Math.random() * loveLetters.length)];
-  text.textContent = random;
+  const random = Math.floor(Math.random() * loveLetters.length);
+  loveLetter.textContent = loveLetters[random];
 }
 
-// --- Motivation ---
+newLetter.addEventListener("click", generateLoveLetter);
+generateLoveLetter();
+
+// RANDOM QUOTES
 const quotes = [
-  "You’re stronger than you think and more beautiful than you know.",
-  "Keep shining, my love — the world needs your light.",
-  "Even on your worst days, you’re still my best choice.",
-  "You are magic wrapped in grace."
+  "Love isn’t perfect, it’s real 💖",
+  "You don’t find love, you build it 🌸",
+  "Your smile is my favorite motivation 💫",
+  "Keep shining, beautiful soul 🌞",
+  "You’re the calm in my chaos 💕"
 ];
+
+const quote = document.getElementById("quote");
+const newQuote = document.getElementById("newQuote");
 
 function generateQuote() {
-  const text = document.getElementById("quoteText");
-  const random = quotes[Math.floor(Math.random() * quotes.length)];
-  text.textContent = random;
+  const random = Math.floor(Math.random() * quotes.length);
+  quote.textContent = quotes[random];
 }
 
-// --- Gallery ---
-const images = [
-  { src: "images/tsuki1.jpg", caption: "my tsuki 💕" },
-  { src: "images/tsuki2.jpg", caption: " she always leaves me feeling breathless" },
-  { src: "images/tsuki3.jpg", caption: "My favorite picture of her 🌹" },
-  { src: "images/tsuki4.jpg", caption: "my love my safe heaven 🌹" },
-  { src: "images/tsuki5.jpg", caption: "my queen 🌹" },
-  { src: "images/tsuki6.jpg", caption: "i'll always feel helpless around her 🌹" },
-  { src: "images/tsuki7.jpg", caption: " Watashi no Tsuki 🌹" },
+newQuote.addEventListener("click", generateQuote);
+generateQuote();
+
+// SLIDESHOW
+let slideIndex = 0;
+function showSlides() {
+  const slides = document.querySelectorAll(".slides");
+  slides.forEach(s => s.style.display = "none");
+  slideIndex++;
+  if (slideIndex > slides.length) slideIndex = 1;
+  slides[slideIndex - 1].style.display = "block";
+  setTimeout(showSlides, 4000);
+}
+showSlides();
+
+// MUSIC PLAYER
+const bgMusic = document.getElementById("bgMusic");
+const musicToggle = document.getElementById("musicToggle");
+let isPlaying = false;
+
+musicToggle.addEventListener("click", () => {
+  if (!isPlaying) {
+    bgMusic.play();
+    musicToggle.textContent = "⏸ Pause Music";
+    isPlaying = true;
+  } else {
+    bgMusic.pause();
+    musicToggle.textContent = "🎶 Play Music";
+    isPlaying = false;
+  }
+});
+
+// FLOATING HEARTS
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.textContent = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = Math.random() * 2 + 4 + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 1000);
+
+// TYPEWRITER EFFECT FOR ABOUT HER
+const aboutText = document.getElementById("aboutText");
+const aboutMessage = [
+  "My Chisom, my ✨ Tsuki ✨, is a universe of warmth and captivating contrast. To look at her is to be instantly charmed: she possesses a rare, luminous beauty — a perfect, harmonious blend of being utterly 💕 cute, undeniably 🔥 sexy, and timelessly 💎 beautiful — all wrapped into one incredible person. Her 🌑 dark skin glows like polished mahogany, rich and flawless, always catching my eye. 💫\n\n",
+  "Beneath that stunning exterior is the fascinating woman I’m lucky enough to know and love. She has a wonderful spirit — immensely 💗 kind and deeply caring, always thinking of others. Yet, she carries a quiet strength, often choosing to keep her deeper emotions within. 💭 She tends to hide her real feelings, which makes the moments she *does* open up to me all the more precious. 💞 Her small acts of courage — trying something new or voicing her heart — are what I admire most. 🌷\n\n",
+  "What makes her truly captivating is that lovely edge to her personality. Yes, she can be a little 💢 stubborn at times and, bless her heart, she nags a lot 😂 — but those quirks are part of the rhythm that makes her *her*. They keep things honest, lively, and filled with love. ❤️ I actually love that about her — it’s her way of showing care and keeping me on my toes. 💘\n\n",
+  "Perhaps the most inspiring thing about her is her deep, contagious curiosity. 🌻 She’s always eager to learn — curious about everything, growing each day, seeing the world with new eyes. That spark for knowledge and understanding is something I admire endlessly. 📚✨\n\n",
+  "She is my home 🏡, my comfort ☁️, my delightful challenge 💫, and the most beautiful woman I know — my amazing Chisom. 💖🌙"
 ];
 
-let currentImage = 0;
-function nextImage() {
-  currentImage = (currentImage + 1) % images.length;
-  document.getElementById("galleryImage").src = images[currentImage].src;
-  document.getElementById("caption").textContent = images[currentImage].caption;
-}
+let typeIndex = 0;
+let messageIndex = 0;
+let typing = false;
 
-// --- Floating Hearts Animation ---
-function createHeart() {
-  const heartsContainer = document.querySelector('.hearts');
-  if (!heartsContainer) return;
-
-  const heart = document.createElement('div');
-  heart.classList.add('heart');
-  heart.textContent = '💖';
-
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.animationDuration = 4 + Math.random() * 3 + 's';
-  heart.style.fontSize = 12 + Math.random() * 18 + 'px';
-  heart.style.opacity = Math.random() * 0.8 + 0.3;
-
-  heartsContainer.appendChild(heart);
-  setTimeout(() => heart.remove(), 7000);
-}
-setInterval(createHeart, 400);
-
-// --- Background Music ---
-const musicBtn = document.getElementById('musicBtn');
-const bgMusic = document.getElementById('bgMusic');
-
-if (musicBtn && bgMusic) {
-  let isPlaying = false;
-  musicBtn.addEventListener('click', () => {
-    if (!isPlaying) {
-      bgMusic.play();
-      musicBtn.textContent = "⏸ Pause Music";
-      isPlaying = true;
+function typeWriter() {
+  if (messageIndex < aboutMessage.length) {
+    if (typeIndex < aboutMessage[messageIndex].length) {
+      aboutText.textContent += aboutMessage[messageIndex].charAt(typeIndex);
+      typeIndex++;
+      setTimeout(typeWriter, 50);
     } else {
-      bgMusic.pause();
-      musicBtn.textContent = "🎵 Play Music";
-      isPlaying = false;
+      aboutText.textContent += "\n\n";
+      messageIndex++;
+      typeIndex = 0;
+      setTimeout(typeWriter, 600);
     }
-  });
+  } else {
+    typing = false;
+  }
 }
+
+// Trigger typing only when "About Her" is shown
+document.querySelector('[data-page="about"]').addEventListener("click", () => {
+  if (!typing) {
+    aboutText.textContent = "";
+    typing = true;
+    typeIndex = 0;
+    messageIndex = 0;
+    typeWriter();
+  }
+});

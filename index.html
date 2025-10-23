@@ -8,25 +8,75 @@
 </head>
 <body>
   <header>
-    <h1>For My Tsuki 💖</h1>
+    <h1>For My Love 💞</h1>
     <nav>
-      <button class="nav-btn" data-page="home">Home</button>
-      <button class="nav-btn" data-page="letters">Love Letters</button>
-      <button class="nav-btn" data-page="motivation">Motivation</button>
-      <button class="nav-btn" data-page="gallery">Gallery</button>
-      <button class="nav-btn" data-page="about">About Her</button>
+      <a href="#" data-page="home">Home</a>
+      <a href="#" data-page="letters">Love Letters</a>
+      <a href="#" data-page="quotes">Quotes</a>
+      <a href="#" data-page="gallery">Gallery</a>
+      <a href="#" data-page="about">About</a>
     </nav>
-    <button id="musicBtn">🎵 Play Music</button>
-    <audio id="bgMusic" loop>
-      <source src="Blooming-Melody.mp3" type="audio/mpeg" />
-    </audio>
   </header>
 
-  <main id="content" class="center">
-    <!-- Dynamic content will appear here -->
+  <main>
+    <!-- HOME PAGE -->
+    <section id="home" class="page active">
+      <h2>You make every day brighter ☀️</h2>
+      <p>Welcome to a place made just for you, my sunshine 💕</p>
+    </section>
+
+    <!-- LOVE LETTERS PAGE -->
+    <section id="letters" class="page">
+      <h2>💌 Random Love Letter</h2>
+      <p id="loveLetter"></p>
+      <button id="newLetter">Generate Another 💖</button>
+    </section>
+
+    <!-- QUOTES PAGE -->
+    <section id="quotes" class="page">
+      <h2>✨ Motivation & Love Quotes</h2>
+      <p id="quote"></p>
+      <button id="newQuote">New Quote 🌸</button>
+    </section>
+
+    <!-- GALLERY PAGE -->
+    <section id="gallery" class="page">
+      <h2>📸 Our Moments</h2>
+      <div class="slideshow">
+        <div class="slides fade">
+          <img src="images/tsuki1.jpg" alt="Photo 1">
+          <div class="caption">Your smile is my favorite view 💓</div>
+        </div>
+        <div class="slides fade">
+          <img src="images/tsuki2.jpg" alt="Photo 2">
+          <div class="caption">You make my world bloom 🌷</div>
+        </div>
+        <div class="slides fade">
+          <img src="images/tsuki3.jpg" alt="Photo 3">
+          <div class="caption">Every second with you feels special ✨</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT HER PAGE -->
+    <section id="about" class="page">
+      <h2>🌙 A Portrait of My Beloved Tsuki 💖</h2>
+      <div class="about-container">
+        <img src="images/tsuki4.jpg" alt="Her beautiful smile">
+        <div class="about-text" id="aboutText">
+        </div>
+      </div>
+    </section>
   </main>
 
-  <div class="hearts"></div>
+  <!-- Floating Music Player -->
+  <div class="music-player">
+    <audio id="bgMusic" loop>
+      <source src="Blooming-Melody.mp3" type="audio/mp3">
+    </audio>
+    <button id="musicToggle">🎶 Play Music</button>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
