@@ -103,6 +103,13 @@ button:hover {
   backdrop-filter: blur(8px);
 }
 
+/* =====  kao ===== */
+.kao p {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
 #musicToggle {
   background: #883344;
   border: none;
