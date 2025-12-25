@@ -1,6 +1,6 @@
 /* ===== Base Styles ===== */
 body {
-  font-family: "dancing sript", cursive;
+  font-family: "dancing script", cursive;
   /* background: linear-gradient(135deg, #ffb6c1, #ff69b4, #ffc0cb); */
   background-color: #883344;
   background-size: 300% 300%;
@@ -22,7 +22,7 @@ body {
 
 /* ===== Header ===== */
 header {
-  font-family: "Comic Sans MS", cursive;
+  font-family: "dancing script", cursive;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(5px);
   border-bottom: 2px solid rgba(255, 255, 255, 0.9);
