@@ -87,10 +87,34 @@ image.addEventListener("click", () => {
 
   // FIFTH CLICK BREAK IMAGE AND REVEAL TEXT
   if (clicks === 5) {
-    image.classList.add("break");
+    // image.classList.add("break");
+    // image.classList.add("crack");
+    // const bg = text.querySelector(".text-bg");
+    // bg.classList.add("crack");
+    // // reveal background + text
+    // setTimeout(() => {
+    //   image.style.display = "none";
+    //   text.style.opacity = "1";
+    //   bg.style.opacity = "1";
+    //   bg.style.transform = "scale(1)";
+    // }, 300);
+    // // show crack lines briefly
+    // setTimeout(() => {
+    //   bg.style.setProperty("--crack-opacity", "1");
+    //   bg.style.opacity = "1";
+    // }, 400);
+
+    image.classList.add("break-image");
+
+    const bg = text.querySelector(".text-bg");
+    text.style.opacity = "1";
+    bg.style.opacity = "1";
+    bg.style.transform = "scale(1)";
+
+    bg.classList.add("crack-glass");
+
     setTimeout(() => {
       image.style.display = "none";
-      text.style.opacity = "1";
     }, 1000);
   }
 });
