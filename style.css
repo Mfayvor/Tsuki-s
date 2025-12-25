@@ -1,6 +1,6 @@
 /* ===== Base Styles ===== */
 body {
-  font-family: "Comic Sans MS";
+  font-family: "dancing sript", cursive;
   /* background: linear-gradient(135deg, #ffb6c1, #ff69b4, #ffc0cb); */
   background-color: #883344;
   background-size: 300% 300%;
@@ -97,7 +97,7 @@ button:hover {
 /* ===== Music Player ===== */
 .music-player {
   position: fixed;
-  bottom: 5px;
+  bottom: 20px;
   right: 20px;
   background: rgba(255, 182, 193, 0.8);
   border-radius: 25px;
@@ -335,18 +335,16 @@ button:hover {
   padding: 24px 32px;
   border-radius: 12px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   opacity: 0;
   transform: scale(0.95);
   transition: opacity 1s ease, transform 1s ease;
   overflow: hidden;
 }
 
-.text-bg::after {
+/* .text-bg::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -372,7 +370,7 @@ button:hover {
 
   opacity: 0;
   pointer-events: none;
-}
+} */
 
 /* ===== crack animation ===== */
 .crack {
