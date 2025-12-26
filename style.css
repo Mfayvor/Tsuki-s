@@ -22,16 +22,21 @@ body {
 
 /* ===== Header ===== */
 header {
+  position: sticky;
+  top: 0;
   font-family: "dancing script", cursive;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(5px);
   border-bottom: 2px solid rgba(255, 255, 255, 0.9);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 9999999;
 }
 
 nav a {
-  color: white;
+  color: maroon;
   margin: 0 15px;
   text-decoration: none;
   font-weight: bold;
@@ -39,8 +44,8 @@ nav a {
 }
 
 nav a:hover {
-  color: #fff;
-  text-decoration: 2px underline white;
+  color: pink;
+  text-decoration: 2px underline maroon;
 }
 
 /* ===== Sections ===== */
@@ -325,7 +330,7 @@ button:hover {
   inset: 0;
   align-items: center;
   justify-content: center;
-  margin: 30px 50px;
+  margin: 30px 10px;
   opacity: 0;
   transition: opacity 1s ease;
   pointer-events: none;
@@ -342,6 +347,7 @@ button:hover {
   transform: scale(0.95);
   transition: opacity 1s ease, transform 1s ease;
   overflow: hidden;
+  padding-bottom: 100px;
 }
 
 /* .text-bg::after {
