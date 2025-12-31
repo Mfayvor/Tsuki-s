@@ -338,7 +338,7 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
       });
       // hide greeting when a card is focused
       if (newYearSection) newYearSection.classList.add("has-focused-card");
-      
+
       // scroll the card to top with smooth behavior
       setTimeout(() => {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
