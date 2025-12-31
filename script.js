@@ -87,28 +87,31 @@ const phrases = [
   "You light up my world.",
   "Your smile is my favorite sight.",
   "Every moment with you is magic.",
+  "My heart beats for you alone.",
+  "You are my sweetest dream.",
+  "Forever grateful for your love.",
+  "You make my days brighter.",
+  "Holding you is my home.",
+  "With you, everything feels right.",
 ];
+
+let clicks = 0;
+let phraseEl = null;
 
 image.addEventListener("click", () => {
   clicks++;
 
   // SHAKE ANIMATION
-  // Use a mobile-friendly shake that doesn't translate the element off-position
   image.classList.remove("shake", "shake-mobile");
   void image.offsetWidth; // reset animation
-  if (window.innerWidth <= 480) {
-    image.classList.add("shake-mobile");
-  } else {
-    image.classList.add("shake");
-  }
-  // collapse
-  el.textContent = el.dataset.truncated + "...";
-  el.dataset.expanded = "false";
+  if (window.innerWidth <= 480) image.classList.add("shake-mobile");
+  else image.classList.add("shake");
 
+  // ensure phrase element exists right after the image
+  phraseEl = container.querySelector(".click-phrase");
   if (!phraseEl) {
     phraseEl = document.createElement("div");
     phraseEl.className = "click-phrase";
-    // insert the phrase element right after the image
     image.insertAdjacentElement("afterend", phraseEl);
   }
 
@@ -116,26 +119,26 @@ image.addEventListener("click", () => {
   phraseEl.textContent = phrase;
   phraseEl.classList.add("visible");
 
-  // remove visible state after a short while so next click will animate again
   clearTimeout(phraseEl._hideTimer);
-  phraseEl._hideTimer = setTimeout(() => {
-    phraseEl.classList.remove("visible");
-  }, 3000);
+  phraseEl._hideTimer = setTimeout(
+    () => phraseEl.classList.remove("visible"),
+    3000
+  );
 
-  // Tenth click BREAK IMAGE AND REVEAL TEXT
+  // Reveal full text after 10 clicks
   if (clicks === 10) {
     image.classList.add("break-image");
 
-    const bg = text.querySelector(".text-bg");
-    text.style.opacity = "1";
-    bg.style.opacity = "1";
-    bg.style.transform = "scale(1)";
-
-    bg.classList.add("crack-glass");
+    const bg = text ? text.querySelector(".text-bg") : null;
+    if (text) text.style.opacity = "1";
+    if (bg) {
+      bg.style.opacity = "1";
+      bg.style.transform = "scale(1)";
+      bg.classList.add("crack-glass");
+    }
 
     setTimeout(() => {
       image.style.display = "none";
-      // also remove the phrase element when revealing
       const p = container.querySelector(".click-phrase");
       if (p) p.remove();
     }, 1000);
