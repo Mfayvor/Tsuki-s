@@ -212,7 +212,8 @@ const floatingPhrases = [
 function createFloatingPhrase() {
   const el = document.createElement("div");
   el.className = "floating-phrase small";
-  const txt = floatingPhrases[Math.floor(Math.random() * floatingPhrases.length)];
+  const txt =
+    floatingPhrases[Math.floor(Math.random() * floatingPhrases.length)];
   el.textContent = `💌 ${txt}`;
   // random horizontal start within center +/- 25vw
   const offset = (Math.random() - 0.5) * 50; // -25 .. 25
@@ -341,18 +342,23 @@ document.addEventListener("DOMContentLoaded", () => {
   renderNewYearCards("#newYearList");
   initSplicable(".splicable", 300);
   // convert existing emojis to Twemoji images for consistent rendering
-  if (window.twemoji) twemoji.parse(document.body, { folder: "svg", ext: ".svg" });
+  if (window.twemoji)
+    twemoji.parse(document.body, { folder: "svg", ext: ".svg" });
 });
 
 // Hide header after a small scroll (couple pixels)
 (function setupHeaderHide() {
   const headerEl = document.querySelector("header");
   if (!headerEl) return;
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 10) {
-      headerEl.classList.add("header-hidden");
-    } else {
-      headerEl.classList.remove("header-hidden");
-    }
-  }, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (window.scrollY > 10) {
+        headerEl.classList.add("header-hidden");
+      } else {
+        headerEl.classList.remove("header-hidden");
+      }
+    },
+    { passive: true }
+  );
 })();
