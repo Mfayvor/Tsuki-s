@@ -156,12 +156,26 @@ function renderNewYearCards(listSelector = "#newYearList") {
   if (!list) return;
   const cards = window.newYearCards || [];
   list.innerHTML = "";
-  cards.forEach((text, i) => {
+  cards.forEach((card, i) => {
     const li = document.createElement("li");
-    li.className = "splicable";
-    li.setAttribute("data-truncate-chars", "300");
+    li.className = "new-card";
+    // add accent class to the card container so header and body can share related styles
+    li.classList.add(`card-accent-${card.accent || 1}`);
     li.dataset.index = i;
-    li.textContent = String(text).trim();
+
+    // header / subject bar
+    const hdr = document.createElement("div");
+    hdr.className = `card-header card-accent-${card.accent || 1}`;
+    hdr.textContent = card.title || `Card ${i + 1}`;
+
+    // body -> this is the splicable element
+    const body = document.createElement("div");
+    body.className = "card-body splicable";
+    body.setAttribute("data-truncate-chars", "300");
+    body.textContent = String(card.text || "").trim();
+
+    li.appendChild(hdr);
+    li.appendChild(body);
     list.appendChild(li);
   });
 }
@@ -302,9 +316,10 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
   });
 
   function toggle(el, btn) {
-    const parent = el.parentElement;
-    const siblings = parent
-      ? Array.from(parent.querySelectorAll(selector))
+    // find the container that holds all cards (closest UL) so we can hide siblings correctly
+    const container = el.closest("ul") || el.parentElement;
+    const siblings = container
+      ? Array.from(container.querySelectorAll(selector))
       : Array.from(nodes);
     const newYearSection = document.querySelector("#new");
 
@@ -314,9 +329,12 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
       el.dataset.expanded = "false";
       el.appendChild(btn);
 
-      // show all siblings again
+      // show all siblings again (remove classes from the card elements)
       siblings.forEach((n) => {
-        n.classList.remove("splicable--hidden", "splicable--focused");
+        const cardEl = n.closest("li") || n.parentElement;
+        if (cardEl)
+          cardEl.classList.remove("splicable--hidden", "splicable--focused");
+        else n.classList.remove("splicable--hidden", "splicable--focused");
       });
       // restore greeting visibility
       if (newYearSection) newYearSection.classList.remove("has-focused-card");
@@ -328,12 +346,23 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
       el.appendChild(btn);
 
       siblings.forEach((n) => {
+        const cardEl = n.closest("li") || n.parentElement;
         if (n === el) {
-          n.classList.add("splicable--focused");
-          n.classList.remove("splicable--hidden");
+          if (cardEl) {
+            cardEl.classList.add("splicable--focused");
+            cardEl.classList.remove("splicable--hidden");
+          } else {
+            n.classList.add("splicable--focused");
+            n.classList.remove("splicable--hidden");
+          }
         } else {
-          n.classList.add("splicable--hidden");
-          n.classList.remove("splicable--focused");
+          if (cardEl) {
+            cardEl.classList.add("splicable--hidden");
+            cardEl.classList.remove("splicable--focused");
+          } else {
+            n.classList.add("splicable--hidden");
+            n.classList.remove("splicable--focused");
+          }
         }
       });
       // hide greeting when a card is focused

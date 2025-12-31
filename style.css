@@ -398,6 +398,102 @@ button:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Structured new-year card: header (subject) + body (splicable) */
+.new-card {
+  list-style: none;
+  min-width: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.new-card:hover {
+  transform: translateY(-3px);
+}
+
+.card-header {
+  padding: 12px 16px;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: white;
+  text-align: left;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.card-header {
+  background: var(--card-accent, rgba(0, 0, 0, 0.12));
+  color: var(--card-accent-foreground, white);
+}
+
+.card-body {
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  text-align: left;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+.card-body .more-link {
+  color: #ffd1e6;
+}
+
+/* ensure focused card styling still applies when splicable is a child */
+.splicable--focused {
+  padding: 20px !important;
+}
+
+/* card background (lighter) so header appears as darker accent */
+.new-card.card-accent-1 {
+  --card-bg: linear-gradient(
+    180deg,
+    rgba(255, 157, 179, 0.08),
+    rgba(255, 157, 179, 0.03)
+  );
+  --card-accent: #ff6f91; /* darker pink */
+  --card-accent-foreground: #fff;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 157, 179, 0.08);
+}
+.new-card.card-accent-2 {
+  --card-bg: linear-gradient(
+    180deg,
+    rgba(155, 123, 255, 0.07),
+    rgba(155, 123, 255, 0.03)
+  );
+  --card-accent: #7b61ff; /* darker purple */
+  --card-accent-foreground: #fff;
+  background: var(--card-bg);
+  border: 1px solid rgba(155, 123, 255, 0.06);
+}
+.new-card.card-accent-3 {
+  --card-bg: linear-gradient(
+    180deg,
+    rgba(255, 210, 122, 0.06),
+    rgba(255, 210, 122, 0.02)
+  );
+  --card-accent: #ffb84d; /* darker gold */
+  --card-accent-foreground: #331800;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 210, 122, 0.06);
+}
+.new-card.card-accent-4 {
+  --card-bg: linear-gradient(
+    180deg,
+    rgba(111, 230, 194, 0.06),
+    rgba(111, 230, 194, 0.02)
+  );
+  --card-accent: #3dd6a8; /* darker teal */
+  --card-accent-foreground: #08321a;
+  background: var(--card-bg);
+  border: 1px solid rgba(111, 230, 194, 0.06);
+}
+
+.card-header {
+  box-shadow: inset 0 -6px 10px rgba(0, 0, 0, 0.06);
+}
+
 #new > h2,
 #new > p {
   transition: opacity 0.3s ease, visibility 0.3s ease;
