@@ -319,7 +319,8 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
 
       siblings.forEach((n) => {
         const cardEl = n.closest("li") || n.parentElement;
-        if (cardEl) cardEl.classList.remove("splicable--hidden", "splicable--focused");
+        if (cardEl)
+          cardEl.classList.remove("splicable--hidden", "splicable--focused");
         else n.classList.remove("splicable--hidden", "splicable--focused");
       });
       if (newYearSection) newYearSection.classList.remove("has-focused-card");
@@ -352,7 +353,8 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
 
       setTimeout(() => {
         const cardEl = el.closest("li") || el;
-        if (cardEl) cardEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (cardEl)
+          cardEl.scrollIntoView({ behavior: "smooth", block: "start" });
         else el.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 50);
     }
