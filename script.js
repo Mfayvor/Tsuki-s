@@ -87,15 +87,7 @@ const phrases = [
   "You light up my world.",
   "Your smile is my favorite sight.",
   "Every moment with you is magic.",
-  "My heart beats for you alone.",
-  "You are my sweetest dream.",
-  "Forever grateful for your love.",
-  "You make my days brighter.",
-  "Holding you is my home.",
-  "With you, everything feels right.",
 ];
-
-let clicks = 0;
 
 image.addEventListener("click", () => {
   clicks++;
@@ -109,8 +101,10 @@ image.addEventListener("click", () => {
   } else {
     image.classList.add("shake");
   }
-  // show a short romantic phrase under the image
-  let phraseEl = container.querySelector(".click-phrase");
+  // collapse
+  el.textContent = el.dataset.truncated + "...";
+  el.dataset.expanded = "false";
+
   if (!phraseEl) {
     phraseEl = document.createElement("div");
     phraseEl.className = "click-phrase";
@@ -120,7 +114,6 @@ image.addEventListener("click", () => {
 
   const phrase = phrases[(clicks - 1) % phrases.length] || "You are my love.";
   phraseEl.textContent = phrase;
-  // trigger visible state
   phraseEl.classList.add("visible");
 
   // remove visible state after a short while so next click will animate again
@@ -296,27 +289,23 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
     el.dataset.truncated = truncated;
     el.dataset.expanded = "false";
 
-    // build truncated view
-    el.textContent = truncated + "... ";
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "more-link";
-    btn.textContent = "more";
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      toggle(el, btn);
-    });
-    el.appendChild(btn);
+    // build truncated view (ellipsis as visual cue)
+    el.textContent = truncated + "...";
 
-    // allow clicking the paragraph to toggle as well
-    el.addEventListener("click", (e) => {
-      if (e.target === btn) return;
-      toggle(el, btn);
-    });
+    // clicking the whole card (li) toggles the body
+    const cardContainer = el.closest("li") || el.parentElement;
+    if (cardContainer) {
+      cardContainer.addEventListener("click", (e) => {
+        const tag = e.target.tagName;
+        if (tag === "A" || tag === "BUTTON") return;
+        toggle(el);
+      });
+    } else {
+      el.addEventListener("click", () => toggle(el));
+    }
   });
 
-  function toggle(el, btn) {
-    // find the container that holds all cards (closest UL) so we can hide siblings correctly
+  function toggle(el) {
     const container = el.closest("ul") || el.parentElement;
     const siblings = container
       ? Array.from(container.querySelectorAll(selector))
@@ -324,26 +313,20 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
     const newYearSection = document.querySelector("#new");
 
     if (el.dataset.expanded === "true") {
-      el.textContent = el.dataset.truncated + "... ";
-      btn.textContent = "more";
+      // collapse
+      el.textContent = el.dataset.truncated + "...";
       el.dataset.expanded = "false";
-      el.appendChild(btn);
 
-      // show all siblings again (remove classes from the card elements)
       siblings.forEach((n) => {
         const cardEl = n.closest("li") || n.parentElement;
-        if (cardEl)
-          cardEl.classList.remove("splicable--hidden", "splicable--focused");
+        if (cardEl) cardEl.classList.remove("splicable--hidden", "splicable--focused");
         else n.classList.remove("splicable--hidden", "splicable--focused");
       });
-      // restore greeting visibility
       if (newYearSection) newYearSection.classList.remove("has-focused-card");
     } else {
-      // expand this one and hide siblings
-      el.textContent = el.dataset.full + " ";
-      btn.textContent = "less";
+      // expand this one and hide others
+      el.textContent = el.dataset.full + "";
       el.dataset.expanded = "true";
-      el.appendChild(btn);
 
       siblings.forEach((n) => {
         const cardEl = n.closest("li") || n.parentElement;
@@ -365,15 +348,24 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
           }
         }
       });
-      // hide greeting when a card is focused
       if (newYearSection) newYearSection.classList.add("has-focused-card");
 
-      // scroll the card to top with smooth behavior
       setTimeout(() => {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        const cardEl = el.closest("li") || el;
+        if (cardEl) cardEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        else el.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 50);
     }
   }
+
+  // close focused card when clicking outside
+  document.addEventListener("click", (e) => {
+    const focusedCard = document.querySelector(".splicable--focused");
+    if (!focusedCard) return;
+    if (focusedCard.contains(e.target)) return;
+    const body = focusedCard.querySelector(".splicable");
+    if (body && body.dataset.expanded === "true") toggle(body);
+  });
 }
 
 // initialize on DOM ready (script is at end of body, but safe to wait)
