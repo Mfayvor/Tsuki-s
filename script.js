@@ -306,6 +306,7 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
     const siblings = parent
       ? Array.from(parent.querySelectorAll(selector))
       : Array.from(nodes);
+    const newYearSection = document.querySelector("#new");
 
     if (el.dataset.expanded === "true") {
       el.textContent = el.dataset.truncated + "... ";
@@ -317,6 +318,8 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
       siblings.forEach((n) => {
         n.classList.remove("splicable--hidden", "splicable--focused");
       });
+      // restore greeting visibility
+      if (newYearSection) newYearSection.classList.remove("has-focused-card");
     } else {
       // expand this one and hide siblings
       el.textContent = el.dataset.full + " ";
@@ -333,6 +336,8 @@ function initSplicable(selector = ".splicable", defaultChars = 250) {
           n.classList.remove("splicable--focused");
         }
       });
+      // hide greeting when a card is focused
+      if (newYearSection) newYearSection.classList.add("has-focused-card");
     }
   }
 }

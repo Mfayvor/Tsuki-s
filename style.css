@@ -353,22 +353,64 @@ button:hover {
   position: relative;
   z-index: 2;
   width: 300px;
+  max-width: 90vw;
+  height: auto;
   cursor: pointer;
   transition: opacity 0.6s ease;
+}
+
+@media (max-width: 768px) {
+  .image-container img {
+    width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-container img {
+    width: 200px;
+  }
 }
 
 /* ===== New Year ===== */
 #new ul {
   display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 #new ul li {
   flex: 1;
-  margin: 0 10px;
+  min-width: 280px;
   padding: 15px;
   list-style: none;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
+}
+
+#new > h2,
+#new > p {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#new.has-focused-card > h2,
+#new.has-focused-card > p {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  #new ul li {
+    min-width: calc(100% - 20px);
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #new ul li {
+    min-width: calc(100% - 20px);
+    padding: 12px;
+    font-size: 14px;
+  }
 }
 
 /* ===== shake animation ===== */
@@ -516,6 +558,14 @@ button:hover {
   transform: translateY(0);
 }
 
+@media (max-width: 480px) {
+  .click-phrase {
+    font-size: 0.95rem;
+    padding: 6px 10px;
+    margin-top: 8px;
+  }
+}
+
 /* ===== hiddden text revealed at end ===== */
 .reveal-text {
   position: absolute;
@@ -538,8 +588,37 @@ button:hover {
   opacity: 0;
   transform: scale(0.95);
   transition: opacity 1s ease, transform 1s ease;
-  overflow: hidden;
+  overflow: auto;
   padding-bottom: 100px;
+  max-height: 85vh;
+  max-width: 90vw;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.text-bg p {
+  margin: 0;
+  font-family: "Dancing Script", cursive;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .text-bg {
+    padding: 18px 20px;
+    font-size: 15px;
+    max-height: 75vh;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-bg {
+    padding: 14px 16px;
+    font-size: 14px;
+    max-height: 70vh;
+    line-height: 1.4;
+    border-radius: 8px;
+  }
 }
 
 /* .text-bg::after {
