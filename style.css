@@ -698,4 +698,15 @@ button:hover {
 }
 .splicable--focused {
   flex: 1 1 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 20px;
+  scroll-margin-top: 120px;
+}
+
+@media (max-width: 480px) {
+  .splicable--focused {
+    max-width: 100%;
+    scroll-margin-top: 100px;
+  }
 }
