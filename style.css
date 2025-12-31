@@ -1,6 +1,6 @@
 /* ===== Base Styles ===== */
 body {
-  font-family: "dancing script", cursive;
+  font-family: "Dancing Script", cursive;
   /* background: linear-gradient(135deg, #ffb6c1, #ff69b4, #ffc0cb); */
   background-color: #883344;
   background-size: 300% 300%;
@@ -9,6 +9,13 @@ body {
   margin: 0;
   text-align: center;
   overflow-x: hidden;
+}
+
+/* ===== Heading Styles (Playfair Display for elegance) ===== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 @keyframes bgMove {
@@ -24,7 +31,7 @@ body {
 header {
   position: sticky;
   top: 0;
-  font-family: "dancing script", cursive;
+  font-family: "Dancing Script", cursive;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(5px);
   border-bottom: 2px solid rgba(255, 255, 255, 0.9);
@@ -33,13 +40,29 @@ header {
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 9999999;
+  transition: transform 0.28s ease-in-out, opacity 0.25s ease-in-out;
+  will-change: transform;
+}
+
+.header-hidden {
+  transform: translateY(-120%);
+  opacity: 0.98;
+}
+
+header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  margin: 0;
 }
 
 nav a {
   color: maroon;
   margin: 0 15px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  font-family: "Dancing Script", cursive;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
   transition: 0.3s;
 }
 
@@ -48,10 +71,19 @@ nav a:hover {
   text-decoration: 2px underline maroon;
 }
 
+/* Active navigation link */
+nav a.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 6px 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
 /* ===== Sections ===== */
 .page {
   display: none;
-  padding: 40px;
+  padding: 40px 40px 150px 40px;
 }
 
 .page.active {
@@ -90,6 +122,8 @@ button {
   padding: 10px 25px;
   border-radius: 25px;
   font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -104,27 +138,89 @@ button:hover {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: rgba(255, 182, 193, 0.8);
-  border-radius: 25px;
-  padding: 10px 20px;
-  border: 2px solid white;
-  box-shadow: 0 0 10px rgba(255, 105, 180, 0.6);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 182, 193, 0.9);
+  border-radius: 18px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,0.9);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .music-player {
+    bottom: 20px;
+    right: 15px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-player {
+    bottom: 20px;
+    right: 12px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
 }
 
 /* =====  kao ===== */
-.kao p {
+.kao {
   position: fixed;
   bottom: 20px;
   left: 20px;
+  z-index: 1000;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.kao p {
+  margin: 0;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  font-family: "Dancing Script", cursive;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .kao {
+    bottom: 20px;
+    left: 15px;
+    font-size: 0.85rem;
+  }
+  
+  .kao p {
+    padding: 7px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .kao {
+    bottom: 20px;
+    left: 12px;
+    font-size: 0.8rem;
+  }
+  
+  .kao p {
+    padding: 6px 10px;
+  }
 }
 
 #musicToggle {
   background: #883344;
   border: none;
   color: white;
-  border-radius: 20px;
-  padding: 8px 15px;
+  border-radius: 12px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  line-height: 1;
 }
 
 /* Floating Hearts */
@@ -207,6 +303,41 @@ button:hover {
   }
 }
 
+@keyframes floatUpSmall {
+  0% {
+    transform: translateY(0) scale(0.95);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(-260px) scale(1.05);
+    opacity: 0;
+  }
+}
+
+/* floating phrase (small, subtle, blends with page) */
+.floating-phrase {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 950;
+  font-family: "Dancing Script", cursive;
+  font-size: 12px;
+  color: rgba(255, 245, 250, 0.95);
+  background: rgba(0, 0, 0, 0.18);
+  padding: 6px 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.18);
+  opacity: 0.95;
+  pointer-events: none;
+  animation: floatUpSmall 5200ms linear forwards;
+}
+
+.floating-phrase.small {
+  font-size: 11px;
+  padding: 5px 8px;
+}
+
 /* ===== christmas ===== */
 .image-container {
   position: relative;
@@ -219,6 +350,20 @@ button:hover {
   width: 300px;
   cursor: pointer;
   transition: opacity 0.6s ease;
+}
+
+/* ===== New Year ===== */
+#new ul {
+  display: flex;
+}
+
+#new ul li {
+  flex: 1;
+  margin: 0 10px;
+  padding: 15px;
+  list-style: none;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
 }
 
 /* ===== shake animation ===== */
@@ -245,6 +390,19 @@ button:hover {
   100% {
     transform: translate(0);
   }
+}
+
+/* Mobile-friendly shake that only rotates slightly to avoid changing position */
+.shake-mobile {
+  animation: shake-mobile 0.45s;
+}
+
+@keyframes shake-mobile {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+  75% { transform: rotate(-1.5deg); }
+  100% { transform: rotate(0deg); }
 }
 
 /* ===== break animation ===== */
@@ -324,6 +482,25 @@ button:hover {
   }
 }
 
+/* short phrase shown under the christmas image on clicks */
+.click-phrase {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.05rem;
+  color: white;
+  text-align: center;
+  margin-top: 12px;
+  background: rgba(0,0,0,0.25);
+  padding: 8px 14px;
+  border-radius: 12px;
+  display: inline-block;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  opacity: 0.0;
+}
+.click-phrase.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ===== hiddden text revealed at end ===== */
 .reveal-text {
   position: absolute;
@@ -400,4 +577,31 @@ button:hover {
     transform: scale(0.9) rotate(8deg);
     opacity: 0;
   }
+}
+
+/* ===== Splicable text (click to reveal) ===== */
+.splicable {
+  cursor: pointer;
+  display: block;
+  text-align: left;
+}
+.splicable .more-link {
+  background: none;
+  border: none;
+  color: #ffd1e6;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 6px;
+}
+.splicable .more-link:hover {
+  text-decoration: underline;
+}
+
+/* when one card is focused, hide the others and expand this one */
+.splicable--hidden {
+  display: none !important;
+}
+.splicable--focused {
+  flex: 1 1 100%;
 }
